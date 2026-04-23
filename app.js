@@ -494,6 +494,207 @@
       </article>`;
   }
 
+  function renderPlaybook() {
+    const useCases = [
+      {
+        id: 'hvh',
+        label: 'High-Volume / Hourly Hiring',
+        color: '#7c3aed',
+        colorLight: 'rgba(124, 58, 237, 0.07)',
+        colorBorder: 'rgba(124, 58, 237, 0.2)',
+        verticals: 'Retail, Hospitality, BPO, Consumer Services, Logistics',
+        roles: 'Cashiers, Customer Service Agents, Warehouse Staff, Food Service Workers',
+        corePressure: 'Speed and recruiter capacity. The highest-quality hourly candidates are off the market within days. The company that reaches them first — not just contacts them, but interviews them — wins.',
+        positioning: 'An always-on interviewer that qualifies every candidate the moment they apply, at any hour, without adding headcount.',
+        approach: [
+          { label: 'Modality', value: 'Voice-first. Matches the informal, conversational nature of real-world hourly interviews. Accessible via SMS link — no app, no login, one tap to begin.' },
+          { label: 'Session length', value: '8–12 minutes. Mirrors the real-world interview: a short, direct manager conversation. Sessions beyond 15 minutes see sharp candidate drop-off.' },
+          { label: 'Question focus', value: 'Availability and shift flexibility first — it is the primary screen in practice. Followed by reliability signals, character and teamwork, and one situational question grounded in a realistic scenario.' },
+          { label: 'What we assess', value: 'Reliability, warmth, availability match, and retention signals. Not job knowledge — skills are trained on the floor. Character and consistency are the valid hiring signals at this level.' },
+          { label: 'Tone', value: 'Conversational and warm. The AI interviewer is configured to sound like a friendly shift supervisor, not an HR system. Plain language, short questions, patient pacing.' },
+          { label: 'Eligibility checks', value: 'Integrated into the session flow — right to work, physical requirements, shift availability, and knockout criteria are handled automatically before interview questions begin.' },
+        ],
+        outcomes: [
+          '100% of applicants interviewed — no candidate left uncontacted due to recruiter capacity',
+          'Shortlist delivered to recruiters by morning, scored and ranked',
+          'Time from application to interview measured in seconds, not days',
+          '80% reduction in manual recruiter screen time',
+          'Seasonal and surge hiring absorbed without adding headcount',
+        ],
+        differentiators: [
+          'Conducts the interview end-to-end — not a scheduling bot, not a chatbot, not a one-way video recording',
+          'Apply & Interview triggers a live AI session the moment a candidate submits — no recruiter touch required',
+          '92.5% interview completion rate with automated follow-ups',
+        ],
+      },
+      {
+        id: 'campus',
+        label: 'Campus & Early Career',
+        color: '#2563eb',
+        colorLight: 'rgba(37, 99, 235, 0.07)',
+        colorBorder: 'rgba(37, 99, 235, 0.2)',
+        verticals: 'Finance, Consulting, Technology, Large Enterprise',
+        roles: 'Interns, New Graduates, Entry-Level Analysts, DEI cohorts',
+        corePressure: 'Consistency at scale. Every resume looks the same. Recruiters screen 3–5% of applicants based on GPA and school pedigree. The result is not a talent filter — it is a bias filter.',
+        positioning: 'Structured, adaptive interviews for every applicant — not just the ones a recruiter had time to reach. The same rubric, across every campus, every cohort, every cycle.',
+        approach: [
+          { label: 'Modality', value: 'Video-led avatar interview. Gen Z candidates share interview experiences widely — the experience itself is part of the employer brand. A high-quality, two-way video interview signals that the company takes candidates seriously.' },
+          { label: 'Session length', value: '20–30 minutes. Campus candidates expect a substantive first interaction. A session under 15 minutes reads as a perfunctory screen, not a genuine evaluation.' },
+          { label: 'Question focus', value: 'STAR-based functional interviews. Problem-solving, communication, and leadership potential — assessed through structured behavioural questions with adaptive follow-ups. Not GPA. Not school. Actual conversational performance.' },
+          { label: 'What we assess', value: 'Thinking quality, communication clarity, and role-specific functional competencies. Pre-built, science-backed question sets by role and industry ensure every candidate is evaluated against the same standard.' },
+          { label: 'Tone', value: 'Professional and encouraging. This persona may be interviewing for the first time. The AI interviewer is warm enough to put candidates at ease, structured enough to produce evaluable signal.' },
+          { label: 'DEI by design', value: 'Identical questions, identical rubric, identical evaluation — for every candidate regardless of school, background, or network. Structural fairness is built into the process, not bolted on.' },
+        ],
+        outcomes: [
+          '100% of applicants receive a structured first-round interview',
+          'Screener variance eliminated — no interviewer inconsistency across campuses or cohorts',
+          'Recruiters spend time on top candidates, not on volume management',
+          'Auditable, documented evaluations for every candidate — defensible under EEOC and DEI compliance review',
+          'Campus brand protected — candidates receive a response, not silence',
+        ],
+        differentiators: [
+          'Pre-built interview library with science-backed question sets by role and industry — deployable across 20+ campuses without customisation',
+          'Adaptive follow-up probes depth — not a static video prompt that every candidate answers identically',
+          'Interview Companion joins human interview days: suggests questions, auto-fills feedback forms',
+        ],
+        comingSoon: true,
+      },
+      {
+        id: 'technical',
+        label: 'Technical & Professional',
+        color: '#d97706',
+        colorLight: 'rgba(217, 119, 6, 0.07)',
+        colorBorder: 'rgba(217, 119, 6, 0.2)',
+        verticals: 'Technology, Engineering, SaaS, Professional Services',
+        roles: 'Software Engineers, Sales / SDRs, Specialised Technical Roles, Technical Fluency Roles',
+        corePressure: 'Skill validation and pipeline quality. Recruiters cannot assess technical depth. Candidates reach hiring manager panels unqualified. Expert time is consumed by filtering, not closing.',
+        positioning: 'A technical skills gate before your experts get involved. The AI interviewer evaluates reasoning, not just answers — so hiring managers see only pre-validated candidates.',
+        approach: [
+          { label: 'Modality', value: 'Video-led avatar interview with integrated coding and whiteboarding capability. Two-way, adaptive, and live — not a recorded prompt or a static assessment.' },
+          { label: 'Session length', value: '30–45 minutes. Technical evaluation requires depth. The AI interviewer probes reasoning, asks follow-up questions on technical claims, and surfaces how a candidate thinks — not just what they can recall.' },
+          { label: 'Question focus', value: 'Technical reasoning and problem-solving. The AI goes beyond "does it compile?" — it asks "why?" and "how does this scale?" Functional interviews for PMs, SEs, and consultants cover role-specific competencies with adaptive follow-ups.' },
+          { label: 'What we assess', value: 'Technical reasoning quality, problem-solving approach, communication of complex ideas, and role-specific functional competencies. Cheat detection and ID verification are integrated — not an afterthought.' },
+          { label: 'Tone', value: 'Precise and intellectually engaged. The AI interviewer is configured to probe meaningfully — not to intimidate, but to surface genuine signal from candidates who actually understand the domain.' },
+          { label: 'Fraud prevention', value: 'ID verification and cheat detection run throughout the session. With 1 in 4 candidate profiles projected to contain fabricated elements by 2028, identity integrity is a core feature, not an add-on.' },
+        ],
+        outcomes: [
+          'Hiring manager and panel time protected — only pre-validated candidates advance',
+          'Interview-to-offer ratio improves as unqualified candidates are filtered before expert involvement',
+          'Technical bar standardised across all recruiters and hiring teams',
+          'Match score correlated with +11.9% promotability and 26% decrease in attrition',
+          'Senior engineer time reclaimed from first-round filtering and returned to building',
+        ],
+        differentiators: [
+          'Evaluates reasoning in real time — HireVue\'s CodeVue runs static on-demand challenges with no adaptive follow-up',
+          'One continuous AI flow: screens, interviews, and evaluates — no fragmented multi-tool handoffs',
+          'Workday has no native coding interview capability; Eightfold owns the full technical evaluation loop',
+        ],
+      },
+      {
+        id: 'trades',
+        label: 'Skilled Trades / Shift-Based',
+        color: '#db2777',
+        colorLight: 'rgba(219, 39, 119, 0.07)',
+        colorBorder: 'rgba(219, 39, 119, 0.2)',
+        verticals: 'Automotive, Healthcare, Manufacturing, Construction',
+        roles: 'Technicians, Forklift Operators, Nurses / CNAs, Shift-Based Skilled Labor',
+        corePressure: 'Access and compliance. Qualified candidates are on job sites and shifts — not checking email during recruiter hours. Every hire carries licensing, safety, or regulatory requirements that must be verified before anyone steps on a floor.',
+        positioning: 'Credential verification and structured skills assessment delivered on the candidate\'s schedule — immediately after application, or at 10pm between shifts.',
+        approach: [
+          { label: 'Modality', value: 'Video-led avatar interview, accessible via SMS on any phone. No app download, no login required. Candidates can complete the interview between shifts, after hours, or from a job site.' },
+          { label: 'Session length', value: '20–35 minutes across two phases. Phase 1: credential verification — license type, number, state, expiration, and role-specific certifications confirmed upfront. Phase 2: structured trade conversation assessing experience, field judgment, and shift availability.' },
+          { label: 'Question focus', value: 'Credential confirmation first. Then: trade-specific experience, systems and equipment familiarity, a realistic field judgment scenario, safety record, and on-call availability. Questions use correct trade terminology — not generic screening language.' },
+          { label: 'What we assess', value: 'Credential validity, relevant trade experience, field reasoning quality, availability match, and compliance readiness. The goal is to deliver ready-to-work candidates to floor supervisors — not just screened ones.' },
+          { label: 'Tone', value: 'Direct, knowledgeable, and collegial. The AI interviewer is configured to sound like an experienced field supervisor or project manager — not a generalist HR coordinator. Trade terminology is required.' },
+          { label: 'Compliance', value: 'Knockout questions validate credentials inside the interview — no license, no pipeline entry. ISO 42001 certified. CEFR-based language proficiency assessed in 22+ languages. Full audit trail for every verification.' },
+        ],
+        outcomes: [
+          'Credentials verified at the point of application — not late in the process when the cost of a failed hire is highest',
+          'Candidates reached and qualified on their schedule — 24/7 availability eliminates shift-timing mismatch',
+          'Compliance documentation automated and auditable — defensible under regulatory review',
+          'Staffing agency dependency reduced — AI interview at $9/session vs $3K–8K per agency placement',
+          'Ready-to-work candidates delivered to floor supervisors with scored, documented evaluations',
+        ],
+        differentiators: [
+          'Credential verification integrated inside the interview — Paradox schedules but does not interview or verify credentials',
+          'CEFR-based language proficiency assessed in 22+ languages inside the session — no separate test needed',
+          'ISO 42001 certified for regulated industries — complete audit trail from application to offer',
+        ],
+      },
+    ];
+
+    const useCaseCards = useCases.map((uc, i) => {
+      const approachRows = uc.approach.map(a => `
+        <div class="playbook-approach-row">
+          <span class="playbook-approach-label">${escapeHtml(a.label)}</span>
+          <p class="playbook-approach-value">${escapeHtml(a.value)}</p>
+        </div>`).join('');
+
+      const outcomeItems = uc.outcomes.map(o =>
+        `<li class="playbook-outcome-item">${escapeHtml(o)}</li>`).join('');
+
+      const diffItems = uc.differentiators.map(d =>
+        `<li class="playbook-diff-item">${escapeHtml(d)}</li>`).join('');
+
+      const comingSoonBadge = uc.comingSoon
+        ? `<span class="playbook-coming-soon">Research coming soon</span>`
+        : '';
+
+      return `
+        <article class="playbook-use-case" style="--uc-color: ${uc.color}; --uc-color-light: ${uc.colorLight}; --uc-color-border: ${uc.colorBorder}; --stagger: ${i}" id="playbook-${uc.id}">
+          <header class="playbook-use-case__header">
+            <div class="playbook-use-case__title-row">
+              <h3 class="playbook-use-case__title">${escapeHtml(uc.label)}</h3>
+              ${comingSoonBadge}
+            </div>
+            <div class="playbook-use-case__meta">
+              <span class="playbook-meta-item"><span class="playbook-meta-label">Verticals</span>${escapeHtml(uc.verticals)}</span>
+              <span class="playbook-meta-divider" aria-hidden="true">·</span>
+              <span class="playbook-meta-item"><span class="playbook-meta-label">Roles</span>${escapeHtml(uc.roles)}</span>
+            </div>
+          </header>
+
+          <div class="playbook-use-case__body">
+            <div class="playbook-pressure-block">
+              <span class="playbook-block-label">Core pressure</span>
+              <p class="playbook-pressure-text">${escapeHtml(uc.corePressure)}</p>
+            </div>
+
+            <div class="playbook-positioning-block">
+              <span class="playbook-block-label">Our approach</span>
+              <p class="playbook-positioning-text">${escapeHtml(uc.positioning)}</p>
+            </div>
+
+            <div class="playbook-approach-block">
+              <span class="playbook-block-label">How we configure the interview</span>
+              <div class="playbook-approach-rows">${approachRows}</div>
+            </div>
+
+            <div class="playbook-two-col">
+              <div class="playbook-outcomes-block">
+                <span class="playbook-block-label">What the customer gets</span>
+                <ul class="playbook-outcomes-list">${outcomeItems}</ul>
+              </div>
+              <div class="playbook-diff-block">
+                <span class="playbook-block-label">Why Eightfold</span>
+                <ul class="playbook-diff-list">${diffItems}</ul>
+              </div>
+            </div>
+          </div>
+        </article>`;
+    }).join('');
+
+    return `
+      <div class="playbook-root">
+        <div class="playbook-intro">
+          <span class="playbook-intro__kicker">AI Interviewer Playbook</span>
+          <h2 class="playbook-intro__title">How we approach each use case</h2>
+          <p class="playbook-intro__sub">Four hiring contexts. Four distinct interview configurations. Each grounded in how these roles are actually filled — and where the current process breaks down.</p>
+        </div>
+        <div class="playbook-use-cases">${useCaseCards}</div>
+      </div>`;
+  }
+
   function renderAiDesignGuidance(bundle, personaId) {
     const guide = bundle.aiDesignGuidance;
     if (!guide) return '<p class="drill-empty">No AI design guidance available for this persona yet.</p>';
@@ -614,11 +815,14 @@
 
     const workspaceViewTabs = document.querySelectorAll('.workspace-view-tab');
     const aiGuideMount = document.getElementById('ai-guide-mount');
+    const playbookMount = document.getElementById('playbook-mount');
     let activeView = 'research';
 
     function setWorkspaceView(view) {
       activeView = view;
       const showResearch = view === 'research';
+      const showAi = view === 'ai';
+      const showPlaybook = view === 'playbook';
 
       workspaceViewTabs.forEach(t => {
         t.setAttribute('aria-selected', t.dataset.view === view ? 'true' : 'false');
@@ -628,14 +832,27 @@
       drillRoot.hidden = !showResearch;
       userProfilesMount.hidden = !showResearch;
 
-      if (!showResearch) {
+      if (showAi) {
         const bundle = DATA[statePersona];
         aiGuideMount.innerHTML = renderAiDesignGuidance(bundle, statePersona);
         aiGuideMount.hidden = false;
       } else {
         aiGuideMount.hidden = true;
         aiGuideMount.innerHTML = '';
+      }
+
+      if (showPlaybook) {
+        playbookMount.innerHTML = renderPlaybook();
+        playbookMount.hidden = false;
+      } else {
+        playbookMount.hidden = true;
+        playbookMount.innerHTML = '';
+      }
+
+      if (showResearch) {
         renderSourcesLink(statePersona);
+      } else {
+        sourcesLinkMount.hidden = true;
       }
     }
 
