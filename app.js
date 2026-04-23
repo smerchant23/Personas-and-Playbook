@@ -494,7 +494,7 @@
       </article>`;
   }
 
-  function renderPlaybook() {
+  function renderPlaybook(activeUCId) {
     const useCases = [
       {
         id: 'hvh',
@@ -623,66 +623,69 @@
       },
     ];
 
-    const useCaseCards = useCases.map((uc, i) => {
-      const approachRows = uc.approach.map(a => `
-        <div class="playbook-approach-row">
-          <span class="playbook-approach-label">${escapeHtml(a.label)}</span>
-          <p class="playbook-approach-value">${escapeHtml(a.value)}</p>
-        </div>`).join('');
+    const active = useCases.find(uc => uc.id === activeUCId) || useCases[0];
 
-      const outcomeItems = uc.outcomes.map(o =>
-        `<li class="playbook-outcome-item">${escapeHtml(o)}</li>`).join('');
+    // ── Internal tab strip ──
+    const tabStrip = useCases.map(uc => {
+      const isActive = uc.id === active.id;
+      return `<button type="button" class="playbook-uc-tab${isActive ? ' playbook-uc-tab--active' : ''}"
+        data-uc="${uc.id}"
+        aria-selected="${isActive ? 'true' : 'false'}"
+        style="--uc-color: ${uc.color}"
+      >${escapeHtml(uc.label)}${uc.comingSoon ? ' <span class="playbook-coming-soon">Research coming soon</span>' : ''}</button>`;
+    }).join('');
 
-      const diffItems = uc.differentiators.map(d =>
-        `<li class="playbook-diff-item">${escapeHtml(d)}</li>`).join('');
+    // ── Active use case panel ──
+    const uc = active;
 
-      const comingSoonBadge = uc.comingSoon
-        ? `<span class="playbook-coming-soon">Research coming soon</span>`
-        : '';
+    const approachItems = uc.approach.map(a =>
+      `<li class="playbook-approach-item"><strong>${escapeHtml(a.label)}:</strong> ${escapeHtml(a.value)}</li>`
+    ).join('');
 
-      return `
-        <article class="playbook-use-case" style="--uc-color: ${uc.color}; --uc-color-light: ${uc.colorLight}; --uc-color-border: ${uc.colorBorder}; --stagger: ${i}" id="playbook-${uc.id}">
-          <header class="playbook-use-case__header">
-            <div class="playbook-use-case__title-row">
-              <h3 class="playbook-use-case__title">${escapeHtml(uc.label)}</h3>
-              ${comingSoonBadge}
+    const outcomeItems = uc.outcomes.map(o =>
+      `<li class="playbook-outcome-item">${escapeHtml(o)}</li>`).join('');
+
+    const diffItems = uc.differentiators.map(d =>
+      `<li class="playbook-diff-item">${escapeHtml(d)}</li>`).join('');
+
+    const panel = `
+      <article class="playbook-use-case" style="--uc-color: ${uc.color}; --uc-color-light: ${uc.colorLight}; --uc-color-border: ${uc.colorBorder}">
+        <header class="playbook-use-case__header">
+          <div class="playbook-use-case__meta">
+            <span class="playbook-meta-item"><span class="playbook-meta-label">Verticals</span>${escapeHtml(uc.verticals)}</span>
+            <span class="playbook-meta-divider" aria-hidden="true">·</span>
+            <span class="playbook-meta-item"><span class="playbook-meta-label">Roles</span>${escapeHtml(uc.roles)}</span>
+          </div>
+        </header>
+
+        <div class="playbook-use-case__body">
+          <div class="playbook-pressure-block">
+            <span class="playbook-block-label">Core pressure</span>
+            <p class="playbook-pressure-text">${escapeHtml(uc.corePressure)}</p>
+          </div>
+
+          <div class="playbook-positioning-block">
+            <span class="playbook-block-label">Our approach</span>
+            <p class="playbook-positioning-text">${escapeHtml(uc.positioning)}</p>
+          </div>
+
+          <div class="playbook-approach-block">
+            <span class="playbook-block-label">How we configure the interview</span>
+            <ul class="playbook-approach-list">${approachItems}</ul>
+          </div>
+
+          <div class="playbook-two-col">
+            <div class="playbook-outcomes-block">
+              <span class="playbook-block-label">What the customer gets</span>
+              <ul class="playbook-outcomes-list">${outcomeItems}</ul>
             </div>
-            <div class="playbook-use-case__meta">
-              <span class="playbook-meta-item"><span class="playbook-meta-label">Verticals</span>${escapeHtml(uc.verticals)}</span>
-              <span class="playbook-meta-divider" aria-hidden="true">·</span>
-              <span class="playbook-meta-item"><span class="playbook-meta-label">Roles</span>${escapeHtml(uc.roles)}</span>
-            </div>
-          </header>
-
-          <div class="playbook-use-case__body">
-            <div class="playbook-pressure-block">
-              <span class="playbook-block-label">Core pressure</span>
-              <p class="playbook-pressure-text">${escapeHtml(uc.corePressure)}</p>
-            </div>
-
-            <div class="playbook-positioning-block">
-              <span class="playbook-block-label">Our approach</span>
-              <p class="playbook-positioning-text">${escapeHtml(uc.positioning)}</p>
-            </div>
-
-            <div class="playbook-approach-block">
-              <span class="playbook-block-label">How we configure the interview</span>
-              <div class="playbook-approach-rows">${approachRows}</div>
-            </div>
-
-            <div class="playbook-two-col">
-              <div class="playbook-outcomes-block">
-                <span class="playbook-block-label">What the customer gets</span>
-                <ul class="playbook-outcomes-list">${outcomeItems}</ul>
-              </div>
-              <div class="playbook-diff-block">
-                <span class="playbook-block-label">Why Eightfold</span>
-                <ul class="playbook-diff-list">${diffItems}</ul>
-              </div>
+            <div class="playbook-diff-block">
+              <span class="playbook-block-label">Why Eightfold</span>
+              <ul class="playbook-diff-list">${diffItems}</ul>
             </div>
           </div>
-        </article>`;
-    }).join('');
+        </div>
+      </article>`;
 
     return `
       <div class="playbook-root">
@@ -691,7 +694,8 @@
           <h2 class="playbook-intro__title">How we approach each use case</h2>
           <p class="playbook-intro__sub">Four hiring contexts. Four distinct interview configurations. Each grounded in how these roles are actually filled — and where the current process breaks down.</p>
         </div>
-        <div class="playbook-use-cases">${useCaseCards}</div>
+        <div class="playbook-uc-tabs" role="tablist" aria-label="Use case">${tabStrip}</div>
+        <div class="playbook-panel">${panel}</div>
       </div>`;
   }
 
@@ -816,7 +820,10 @@
     const workspaceViewTabs = document.querySelectorAll('.workspace-view-tab');
     const aiGuideMount = document.getElementById('ai-guide-mount');
     const playbookMount = document.getElementById('playbook-mount');
+    const personaStrip = document.getElementById('persona-strip');
+    const personaWorkspace = document.getElementById('persona-workspace');
     let activeView = 'research';
+    let activePlaybookUC = 'hvh';
 
     function setWorkspaceView(view) {
       activeView = view;
@@ -828,36 +835,50 @@
         t.setAttribute('aria-selected', t.dataset.view === view ? 'true' : 'false');
       });
 
-      companyFilterBar.hidden = !showResearch;
-      drillRoot.hidden = !showResearch;
-      userProfilesMount.hidden = !showResearch;
+      // Persona strip + workspace visible for research and design guidance only
+      personaStrip.hidden = showPlaybook;
+      personaWorkspace.hidden = showPlaybook;
 
-      if (showAi) {
-        const bundle = DATA[statePersona];
-        aiGuideMount.innerHTML = renderAiDesignGuidance(bundle, statePersona);
-        aiGuideMount.hidden = false;
-      } else {
-        aiGuideMount.hidden = true;
-        aiGuideMount.innerHTML = '';
+      if (!showPlaybook) {
+        companyFilterBar.hidden = !showResearch;
+        drillRoot.hidden = !showResearch;
+        userProfilesMount.hidden = !showResearch;
+
+        if (showAi) {
+          const bundle = DATA[statePersona];
+          aiGuideMount.innerHTML = renderAiDesignGuidance(bundle, statePersona);
+          aiGuideMount.hidden = false;
+        } else {
+          aiGuideMount.hidden = true;
+          aiGuideMount.innerHTML = '';
+        }
+
+        if (showResearch) {
+          renderSourcesLink(statePersona);
+        } else {
+          sourcesLinkMount.hidden = true;
+        }
       }
 
       if (showPlaybook) {
-        playbookMount.innerHTML = renderPlaybook();
+        playbookMount.innerHTML = renderPlaybook(activePlaybookUC);
         playbookMount.hidden = false;
       } else {
         playbookMount.hidden = true;
         playbookMount.innerHTML = '';
       }
-
-      if (showResearch) {
-        renderSourcesLink(statePersona);
-      } else {
-        sourcesLinkMount.hidden = true;
-      }
     }
 
     workspaceViewTabs.forEach(tab => {
       tab.addEventListener('click', () => setWorkspaceView(tab.dataset.view));
+    });
+
+    // Playbook internal tab navigation (event delegation)
+    playbookMount.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-uc]');
+      if (!btn) return;
+      activePlaybookUC = btn.dataset.uc;
+      playbookMount.innerHTML = renderPlaybook(activePlaybookUC);
     });
 
     let statePersona = "customerFacing";
