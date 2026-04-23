@@ -2559,13 +2559,23 @@ details.ai-guide__section[open] .ai-guide__section-summary::after {
 
 .playbook-approach-item {
   font-size: 0.875rem;
-  line-height: 1.6;
+  line-height: 1.5;
   color: var(--text);
 }
 
-.playbook-approach-item strong {
-  color: var(--uc-color, var(--text));
+.playbook-approach-item__label {
+  display: block;
   font-weight: 700;
+  font-size: 0.8125rem;
+  color: var(--uc-color, var(--text));
+  margin-bottom: 0.1rem;
+}
+
+.playbook-approach-item__value {
+  display: block;
+  font-size: 0.8375rem;
+  line-height: 1.55;
+  color: var(--text-muted);
 }
 
 /* ── Two col: outcomes + differentiators ── */

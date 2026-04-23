@@ -639,7 +639,10 @@
     const uc = active;
 
     const approachItems = uc.approach.map(a =>
-      `<li class="playbook-approach-item"><strong>${escapeHtml(a.label)}:</strong> ${escapeHtml(a.value)}</li>`
+      `<li class="playbook-approach-item">
+        <span class="playbook-approach-item__label">${escapeHtml(a.label)}</span>
+        <span class="playbook-approach-item__value">${escapeHtml(a.value)}</span>
+      </li>`
     ).join('');
 
     const outcomeItems = uc.outcomes.map(o =>
@@ -840,6 +843,8 @@
       personaWorkspace.hidden = showPlaybook;
 
       if (!showPlaybook) {
+        // Overview block only shown in Research view
+        overviewMount.parentElement.hidden = !showResearch;
         companyFilterBar.hidden = !showResearch;
         drillRoot.hidden = !showResearch;
         userProfilesMount.hidden = !showResearch;
