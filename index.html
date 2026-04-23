@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Low-skilled interview playbooks — by persona &amp; company</title>
+    <meta
+      name="description"
+      content="Persona-level hiring patterns for customer-facing and operations-support roles, with per-company drill-downs."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Instrument+Sans:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css?v=37" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <div class="wrap">
+      <section class="hero" aria-labelledby="hero-title">
+        <h1 id="hero-title">Interview Process by Persona Type</h1>
+        <p class="hero-sub">
+          See what is typical across employers for the low-skilled persona, dig deeper into a company for
+          brand-specific interview detail. Built with care for smart-interview expansion beyond high-skilled hiring.
+        </p>
+      </section>
+
+      <div class="persona-strip">
+        <h2 class="persona-strip__label" id="persona-type-label">Persona</h2>
+        <div class="persona-type-tabs" role="tablist" aria-labelledby="persona-type-label">
+          <button
+            type="button"
+            class="persona-type-tab persona-type-tab--customer"
+            role="tab"
+            id="ptab-customerFacing"
+            data-persona="customerFacing"
+            aria-selected="false"
+            aria-controls="persona-workspace"
+          >
+            <span class="persona-type-tab__title">Low skilled — Customer facing</span>
+            <span class="persona-type-tab__hint">Retail, QSR, in-store service</span>
+          </button>
+          <button
+            type="button"
+            class="persona-type-tab persona-type-tab--operations"
+            role="tab"
+            id="ptab-operations"
+            data-persona="operations"
+            aria-selected="false"
+            aria-controls="persona-workspace"
+          >
+            <span class="persona-type-tab__title">Low skilled — Operations support</span>
+            <span class="persona-type-tab__hint">Logistics, plants, facilities services</span>
+          </button>
+          <button
+            type="button"
+            class="persona-type-tab persona-type-tab--supervisor"
+            role="tab"
+            id="ptab-technician"
+            data-persona="technician"
+            aria-selected="false"
+            aria-controls="persona-workspace"
+          >
+            <span class="persona-type-tab__title">Technician / Supervisor</span>
+            <span class="persona-type-tab__hint">Internal promotions — Amazon, Walmart, UPS, Target, Tyson</span>
+          </button>
+          <button
+            type="button"
+            class="persona-type-tab persona-type-tab--trade"
+            role="tab"
+            id="ptab-skilledTrade"
+            data-persona="skilledTrade"
+            aria-selected="false"
+            aria-controls="persona-workspace"
+          >
+            <span class="persona-type-tab__title">Skilled Trade Worker</span>
+            <span class="persona-type-tab__hint">Licensed trades — electrician, HVAC, plumbing, welding</span>
+          </button>
+          <button
+            type="button"
+            class="persona-type-tab persona-type-tab--credentialed"
+            role="tab"
+            id="ptab-credentialedProfessional"
+            data-persona="credentialedProfessional"
+            aria-selected="false"
+            aria-controls="persona-workspace"
+          >
+            <span class="persona-type-tab__title">Credentialed Professional</span>
+            <span class="persona-type-tab__hint">RN, pharmacist, K–12 teacher, CPA / Big 4</span>
+          </button>
+        </div>
+      </div>
+
+      <div id="persona-workspace" class="persona-workspace">
+        <section class="persona-overview-block">
+          <div id="persona-overview-mount"></div>
+        </section>
+
+        <div class="workspace-view-tabs" id="workspace-view-tabs" role="tablist" aria-label="Workspace view">
+          <button type="button" class="workspace-view-tab" role="tab" id="wvtab-research"
+            data-view="research" aria-selected="true">Hiring Research</button>
+          <button type="button" class="workspace-view-tab workspace-view-tab--ai" role="tab" id="wvtab-ai"
+            data-view="ai" aria-selected="false">AI Interview Design Guidance</button>
+        </div>
+        <div id="ai-guide-mount" hidden></div>
+
+        <div class="company-filter-bar company-filter-bar--below-overview" id="company-filter-bar">
+          <h2 class="company-filter-bar__label" id="company-filter-label">Companies</h2>
+          <p class="company-filter-bar__sub">Drill down into company-specific details here</p>
+          <div
+            id="company-filter-tabs"
+            class="company-tabs company-tabs--wrap"
+            role="tablist"
+            aria-labelledby="company-filter-label"
+          ></div>
+        </div>
+
+        <main id="main" class="content">
+          <p class="section-kicker company-drill-kicker" id="company-playbook-kicker">Company-specific playbook</p>
+          <div
+            id="company-drill-root"
+            class="company-drill-slot"
+            role="region"
+            aria-live="polite"
+            aria-label="Company-specific interview detail"
+          ></div>
+          <div id="persona-user-profiles-mount" class="persona-user-profiles-mount" aria-live="polite"></div>
+          <p class="persona-panel__sources" id="sources-link-mount" hidden></p>
+        </main>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <p>
+          Research in <code>data.js</code>; citations: <a href="sources-customer-facing.html">customer-facing sources</a>,
+          <a href="sources.html">operations sources</a>.           Examples: <code>#customerFacing--mcdonalds</code>,
+          <code>#operations--amazon-fulfilment</code>. Not affiliated with any employer.
+        </p>
+      </div>
+    </footer>
+
+    <script src="data.js?v=25"></script>
+    <script src="app.js?v=32"></script>
+  </body>
+</html>

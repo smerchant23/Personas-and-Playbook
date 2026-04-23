@@ -1,0 +1,3 @@
+# Static site — no build step. Deploy this folder as the site root.
+[build]
+  publish = "."
