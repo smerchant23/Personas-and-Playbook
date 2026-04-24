@@ -702,6 +702,194 @@
       </div>`;
   }
 
+  function renderCandidateScorecard() {
+
+    const TIER_META = {
+      gates:       { label: 'Tier 1 — Eligibility Gates',    sublabel: 'Hard knockout. Automated. No exceptions.',                     color: '#dc2626', colorLight: 'rgba(220,38,38,0.06)',  colorBorder: 'rgba(220,38,38,0.18)'  },
+      core:        { label: 'Tier 2 — Core Fit',             sublabel: 'Must-have signals. Assessed in the AI interview.',              color: '#7c3aed', colorLight: 'rgba(124,58,237,0.06)', colorBorder: 'rgba(124,58,237,0.18)' },
+      accelerators:{ label: 'Tier 3 — Accelerators',         sublabel: 'Good-to-have. Boosts candidate ranking when present.',         color: '#d97706', colorLight: 'rgba(217,119,6,0.06)',  colorBorder: 'rgba(217,119,6,0.18)'  },
+      retention:   { label: 'Tier 4 — Retention Predictors', sublabel: 'Standout signals. Differentiates the shortlist.',              color: '#16a34a', colorLight: 'rgba(22,163,74,0.06)',  colorBorder: 'rgba(22,163,74,0.18)'  },
+    };
+
+    const roles = [
+      {
+        id: 'warehouse',
+        title: 'Warehouse / Fulfillment Associate',
+        employers: 'Amazon Fulfillment · UPS · FedEx · ABM Industries',
+        description: 'Pickers, packers, sorters, loaders — high-volume physical roles with safety requirements and shift-based scheduling.',
+        tiers: {
+          gates: [
+            { signal: 'Shift availability match',         rationale: 'Must cover required shifts — morning, overnight, weekend. A great candidate on the wrong schedule is an immediate no-hire.' },
+            { signal: 'Physical capability confirmed',    rationale: 'Ability to lift role-specific weight threshold (typically 25–70 lbs) and stand for extended periods. Safety and operational requirement.' },
+            { signal: 'Work authorisation',               rationale: 'Legal right to work in the role jurisdiction. Non-negotiable at application.' },
+            { signal: 'Background check consent',         rationale: 'Required across all warehouse employers in research. Consent must be confirmed before advancing.' },
+            { signal: 'Drug test consent',                rationale: 'Required at Amazon, UPS, FedEx, and ABM. Oral swab typically administered at orientation. Consent confirmed here.' },
+          ],
+          core: [
+            { signal: 'Reliability and attendance history',   rationale: 'The primary predictor of value in physical shift roles. Candidates who can articulate consistent attendance — and explain any gaps honestly — score higher than those who cannot.' },
+            { signal: 'Composure under physical pressure',    rationale: 'Warehouse roles involve pace, noise, and physical demand. Candidates who show awareness of and comfort with that environment are meaningfully more retainable.' },
+            { signal: 'Safety-conscious mindset',             rationale: 'Injury incidents are a top-line cost driver for warehouse employers. Candidates who proactively reference safety habits — without prompting — are a meaningful positive signal.' },
+            { signal: 'Team orientation',                     rationale: 'Shift teams depend on each other directly. Candidates who describe work in terms of the team — not just their own tasks — signal better fit.' },
+            { signal: 'Follows instructions accurately',      rationale: 'Process adherence is critical in pick-and-pack and sort operations. Candidates who describe checking their work or asking when unsure are preferable to those who project overconfidence.' },
+          ],
+          accelerators: [
+            { signal: 'Prior warehouse or logistics experience', rationale: 'Reduces ramp-up time. Familiarity with conveyor systems, scanning equipment, or fulfilment flow is immediately useful.' },
+            { signal: 'Forklift or equipment certification',    rationale: 'Not required for most entry-level roles but meaningfully expands scheduling flexibility and reduces training investment.' },
+            { signal: 'Multilingual capability',               rationale: 'Spanish bilingualism is particularly valuable in US warehouse environments. Enables communication across team and with supervisors.' },
+            { signal: 'Inventory or WMS system familiarity',   rationale: 'Experience with warehouse management systems (even basic scan-and-confirm workflows) accelerates onboarding.' },
+          ],
+          retention: [
+            { signal: 'Growth orientation',                    rationale: 'Research shows internal mobility is a strong retention driver. Candidates who express interest in learning more or moving into team lead roles are significantly more likely to stay beyond 6 months.' },
+            { signal: 'Financial stability signals',           rationale: 'Candidates who describe consistent prior employment — even in unrelated roles — signal that work is a stable part of their life, not a stopgap.' },
+            { signal: 'Realistic role awareness',              rationale: 'Candidates who accurately describe the demands of the role before starting — pace, physicality, shift structure — show lower early attrition. Unrealistic expectations are the leading cause of 30-day dropout.' },
+            { signal: 'Referral source',                       rationale: 'Referred candidates consistently show longer tenure than job-board applicants across warehouse employers. Referral is itself a soft credential signal.' },
+          ],
+        },
+      },
+      {
+        id: 'cashier',
+        title: 'Cashier / Customer Service Associate',
+        employers: 'McDonald\'s · Target · Kroger · Dollar General · Home Depot',
+        description: 'Front-of-house transaction and service roles in retail and QSR — high customer contact, scripted interaction, and shift-based scheduling.',
+        tiers: {
+          gates: [
+            { signal: 'Shift availability match',         rationale: 'Nights, weekends, and split shifts are the operating reality. A candidate who cannot cover required shifts cannot be scheduled.' },
+            { signal: 'Work authorisation',               rationale: 'Legal right to work. Confirmed at application.' },
+            { signal: 'Background check consent',         rationale: 'Required at Target, Home Depot, Kroger, and most franchise QSR locations. Consent confirmed before advancing.' },
+            { signal: 'Age requirement where applicable', rationale: 'Some roles (alcohol sales, certain equipment) have minimum age requirements. Confirmed as a knockout criterion.' },
+          ],
+          core: [
+            { signal: 'Warmth and customer orientation',    rationale: 'The primary signal employers screen for in person. Candidates who speak naturally about helping people — not just completing transactions — match what managers are looking for. Character over credentials.' },
+            { signal: 'Composure with difficult customers', rationale: 'Every research participant in QSR and retail described being asked about upset customers. This is the central interview question for a reason — it surfaces emotional regulation under social pressure.' },
+            { signal: 'Reliability signals',               rationale: 'Transportation to work, consistency in prior roles, and clear explanation of any gaps are the most-cited screening factors across all customer-facing employers in the research.' },
+            { signal: 'Teamwork orientation',              rationale: 'Front-of-house roles require constant handoffs. Candidates who describe work as a shared effort — covering for teammates, helping during rush — are meaningfully stronger fits.' },
+            { signal: 'Honest self-awareness',             rationale: 'Candidates who give coached answers to obvious questions provide no signal. Those who describe specific past situations — including difficulties — give the scoring model something to work with.' },
+          ],
+          accelerators: [
+            { signal: 'Prior retail or QSR experience',   rationale: 'Reduces training time. Familiarity with POS systems, cash handling, and customer service scripts is immediately useful even if not required.' },
+            { signal: 'Cash handling experience',         rationale: 'Directly relevant for cashier roles. Reduces error rate and shrink risk in first weeks.' },
+            { signal: 'Multilingual capability',          rationale: 'Spanish bilingualism is particularly valuable in customer-facing roles. Directly improves customer experience and widens the candidate\'s scheduling utility.' },
+            { signal: 'Cross-training willingness',       rationale: 'Candidates open to covering multiple stations or departments give managers more scheduling flexibility — a meaningful operational benefit.' },
+          ],
+          retention: [
+            { signal: 'Growth orientation',               rationale: 'QSR and retail have strong internal promotion paths (shift supervisor, team lead, assistant manager). Candidates who express interest in growing within the role stay longer and are cheaper to promote than external hires.' },
+            { signal: 'Fit with role demands',            rationale: 'Candidates who describe the pace, the customer volume, and the physical demands accurately before starting show dramatically lower 30-day dropout. Only 54% of QSR employees reach the 90-day mark — realistic expectations at hire are the intervention.' },
+            { signal: 'Community or local ties',          rationale: 'Candidates who live near the location and have community connections — family, school, neighbourhood — show longer average tenure. Transient candidates show shorter tenure regardless of interview performance.' },
+            { signal: 'Scheduling flexibility headroom',  rationale: 'Candidates with slightly more availability than the minimum required give managers buffer to absorb no-shows and surge shifts. This is a meaningful operational differentiator between equally qualified candidates.' },
+          ],
+        },
+      },
+      {
+        id: 'qsr',
+        title: 'QSR Crew Member / Food Service Worker',
+        employers: 'McDonald\'s · Chick-fil-A · Starbucks · Whole Foods',
+        description: 'Kitchen, counter, and delivery roles in quick-service and café environments — values-driven hiring, high pace, and character-first screening.',
+        tiers: {
+          gates: [
+            { signal: 'Shift availability match',         rationale: 'QSR operates across early morning, lunch, dinner, and late-night windows. Availability must match operational need — not just "I\'m flexible".' },
+            { signal: 'Work authorisation',               rationale: 'Legal right to work. Confirmed at application.' },
+            { signal: 'Food handler eligibility',         rationale: 'Some jurisdictions require food handler certification or the willingness to obtain one. Confirmed as a knockout criterion where applicable.' },
+            { signal: 'Driver\'s license where required', rationale: 'Delivery roles at Chick-fil-A and some McDonald\'s locations require a valid license. Confirmed as role-specific knockout.' },
+          ],
+          core: [
+            { signal: 'Warmth and values alignment',      rationale: 'Chick-fil-A explicitly screens for "Second Mile Service" orientation. Starbucks screens for teamwork and pressure handling. Across all QSR employers in the research, character is the primary screen — not job knowledge.' },
+            { signal: 'Composure under service pressure', rationale: 'Rush periods are the defining operational challenge. Candidates who can describe staying calm, focused, and helpful when things go wrong are the signal employers are paying for.' },
+            { signal: 'Reliability and attendance',       rationale: 'The most operationally costly failure in QSR is the no-show. Candidates who demonstrate a pattern of showing up — in any context, not just prior food service — are meaningfully preferable.' },
+            { signal: 'Teamwork in fast-paced context',   rationale: 'Kitchen and counter roles require constant coordination. Candidates who describe covering for teammates, communicating during rush, or helping train new staff are top-tier signals.' },
+            { signal: 'Customer empathy',                 rationale: 'Distinct from warmth — this is the ability to read and respond to a customer\'s emotional state. Candidates who describe specific instances of de-escalation or going out of their way for a customer score significantly higher.' },
+          ],
+          accelerators: [
+            { signal: 'Prior QSR or food service experience', rationale: 'Reduces training time. Familiarity with kitchen equipment, order flow, and service scripts is immediately useful. Not required — Chick-fil-A and Starbucks both hire first-timers — but accelerates ramp-up.' },
+            { signal: 'Food safety awareness',            rationale: 'Candidates who reference temperature handling, cross-contamination, or hygiene without prompting show operational maturity that reduces training overhead.' },
+            { signal: 'Multilingual capability',          rationale: 'Spanish bilingualism is particularly valuable in customer-facing QSR roles. Extends the candidate\'s utility across customer interactions and team communication.' },
+            { signal: 'Barista or specialty beverage experience', rationale: 'Specifically relevant for Starbucks and café roles. Familiarity with espresso workflow, drink customisation, and order queuing is a meaningful accelerator.' },
+          ],
+          retention: [
+            { signal: 'Values fit — not just role fit',   rationale: 'Chick-fil-A\'s 2–3 interview process is explicitly designed to surface values alignment. Candidates hired on values stay longer than candidates hired on availability. The AI interview should surface this signal — not just screen for schedule.' },
+            { signal: 'Growth orientation',               rationale: 'Starbucks and McDonald\'s both have internal promotion paths. Candidates who express interest in becoming a trainer, shift lead, or supervisor are significantly more retainable than those who describe the role as temporary.' },
+            { signal: 'Peer referral source',             rationale: 'Friend or family referral is the strongest single retention predictor across QSR employers in the research. Referred candidates show longer tenure, faster onboarding, and lower early attrition.' },
+            { signal: 'Workload self-awareness',          rationale: 'Research shows workload is the number one reason QSR workers quit — not pay. Candidates who accurately describe what a peak lunch rush feels like, and express genuine readiness for it, are meaningfully more retainable than those who underestimate it.' },
+          ],
+        },
+      },
+    ];
+
+    const tierKeys = ['gates', 'core', 'accelerators', 'retention'];
+
+    function renderTier(tierKey, signals) {
+      const meta = TIER_META[tierKey];
+      const rows = signals.map(s => `
+        <div class="sc-signal-row">
+          <div class="sc-signal-name">${escapeHtml(s.signal)}</div>
+          <p class="sc-signal-rationale">${escapeHtml(s.rationale)}</p>
+        </div>`).join('');
+      return `
+        <div class="sc-tier" style="--tier-color:${meta.color};--tier-light:${meta.colorLight};--tier-border:${meta.colorBorder}">
+          <div class="sc-tier__header">
+            <span class="sc-tier__label">${escapeHtml(meta.label)}</span>
+            <span class="sc-tier__sublabel">${escapeHtml(meta.sublabel)}</span>
+          </div>
+          <div class="sc-tier__signals">${rows}</div>
+        </div>`;
+    }
+
+    const roleCards = roles.map((role, i) => {
+      const tiersHtml = tierKeys.map(k => renderTier(k, role.tiers[k])).join('');
+      return `
+        <article class="sc-role-card" style="--stagger:${i}" id="sc-role-${role.id}">
+          <header class="sc-role-card__header">
+            <h3 class="sc-role-card__title">${escapeHtml(role.title)}</h3>
+            <p class="sc-role-card__employers">${escapeHtml(role.employers)}</p>
+            <p class="sc-role-card__desc">${escapeHtml(role.description)}</p>
+          </header>
+          <div class="sc-role-card__tiers">${tiersHtml}</div>
+        </article>`;
+    }).join('');
+
+    return `
+      <div class="scorecard-root">
+        <div class="scorecard-intro">
+          <div class="scorecard-intro__title-row">
+            <span class="scorecard-intro__kicker">Candidate Scorecard</span>
+            <span class="scorecard-wip-badge">Work in progress</span>
+          </div>
+          <h2 class="scorecard-intro__title">High-Volume Hiring — Role definitions</h2>
+          <p class="scorecard-intro__sub">Eightfold defines what good looks like for each HVH role before the AI interview begins. The four tiers form the scoring framework — eligibility gates are automated knockouts, core fit is assessed in the interview, accelerators and retention predictors differentiate the shortlist. Tier weights are co-configured with each customer.</p>
+          <div class="scorecard-intro__model">
+            <div class="scorecard-model-block">
+              <span class="scorecard-model-label">Eightfold provides</span>
+              <p class="scorecard-model-text">Baseline signal definitions, rationale, and tier structure — grounded in hiring research and retention data across the role type.</p>
+            </div>
+            <div class="scorecard-model-divider" aria-hidden="true">+</div>
+            <div class="scorecard-model-block">
+              <span class="scorecard-model-label">Customer configures</span>
+              <p class="scorecard-model-text">Tier weights, role-specific knockouts, company-specific values signals, and any industry or location-specific requirements.</p>
+            </div>
+            <div class="scorecard-model-divider" aria-hidden="true">=</div>
+            <div class="scorecard-model-block scorecard-model-block--output">
+              <span class="scorecard-model-label">Output</span>
+              <p class="scorecard-model-text">A curated shortlist scored against a definition of "good" that is specific to this company, this role, and this hiring context.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="scorecard-tier-legend">
+          ${tierKeys.map(k => {
+            const m = TIER_META[k];
+            return `<div class="sc-legend-item" style="--tier-color:${m.color};--tier-light:${m.colorLight};--tier-border:${m.colorBorder}">
+              <span class="sc-legend-dot"></span>
+              <div>
+                <span class="sc-legend-label">${escapeHtml(m.label)}</span>
+                <span class="sc-legend-sub">${escapeHtml(m.sublabel)}</span>
+              </div>
+            </div>`;
+          }).join('')}
+        </div>
+
+        <div class="scorecard-roles">${roleCards}</div>
+      </div>`;
+  }
+
   function renderAiDesignGuidance(bundle, personaId) {
     const guide = bundle.aiDesignGuidance;
     if (!guide) return '<p class="drill-empty">No AI design guidance available for this persona yet.</p>';
@@ -823,6 +1011,7 @@
     const workspaceViewTabs = document.querySelectorAll('.workspace-view-tab');
     const aiGuideMount = document.getElementById('ai-guide-mount');
     const playbookMount = document.getElementById('playbook-mount');
+    const scorecardMount = document.getElementById('scorecard-mount');
     const personaStrip = document.getElementById('persona-strip');
     const personaWorkspace = document.getElementById('persona-workspace');
     let activeView = 'research';
@@ -830,23 +1019,25 @@
 
     function setWorkspaceView(view) {
       activeView = view;
-      const showResearch = view === 'research';
-      const showAi = view === 'ai';
-      const showPlaybook = view === 'playbook';
+      const showResearch  = view === 'research';
+      const showAi        = view === 'ai';
+      const showPlaybook  = view === 'playbook';
+      const showScorecard = view === 'scorecard';
 
       workspaceViewTabs.forEach(t => {
         t.setAttribute('aria-selected', t.dataset.view === view ? 'true' : 'false');
       });
 
-      // Persona strip + workspace visible for research and design guidance only
-      personaStrip.hidden = showPlaybook;
-      personaWorkspace.hidden = showPlaybook;
+      // Persona strip + workspace only for research and design guidance
+      const showPersonaPanel = showResearch || showAi;
+      personaStrip.hidden    = !showPersonaPanel;
+      personaWorkspace.hidden = !showPersonaPanel;
 
-      if (!showPlaybook) {
+      if (showPersonaPanel) {
         // Overview block only shown in Research view
         overviewMount.parentElement.hidden = !showResearch;
-        companyFilterBar.hidden = !showResearch;
-        drillRoot.hidden = !showResearch;
+        companyFilterBar.hidden  = !showResearch;
+        drillRoot.hidden         = !showResearch;
         userProfilesMount.hidden = !showResearch;
 
         if (showAi) {
@@ -871,6 +1062,14 @@
       } else {
         playbookMount.hidden = true;
         playbookMount.innerHTML = '';
+      }
+
+      if (showScorecard) {
+        scorecardMount.innerHTML = renderCandidateScorecard();
+        scorecardMount.hidden = false;
+      } else {
+        scorecardMount.hidden = true;
+        scorecardMount.innerHTML = '';
       }
     }
 
