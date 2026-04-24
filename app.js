@@ -1241,25 +1241,23 @@
 
     function renderTier(tierKey, signals) {
       const meta = TIER_META[tierKey];
-      const rows = signals.map(s => `
-        <div class="sc-signal-row">
-          <div class="sc-signal-name">${escapeHtml(s.signal)}</div>
-          <p class="sc-signal-rationale">${escapeHtml(s.rationale)}</p>
-        </div>`).join('');
+      const items = signals.map(s =>
+        `<li class="sc-signal-item">${escapeHtml(s.signal)}</li>`
+      ).join('');
       return `
-        <div class="sc-tier" style="--tier-color:${meta.color};--tier-light:${meta.colorLight};--tier-border:${meta.colorBorder}">
-          <div class="sc-tier__header">
+        <div class="sc-tier-card" style="--tier-color:${meta.color};--tier-light:${meta.colorLight};--tier-border:${meta.colorBorder}">
+          <div class="sc-tier-card__header">
             <span class="sc-tier__label">${escapeHtml(meta.label)}</span>
             <span class="sc-tier__sublabel">${escapeHtml(meta.sublabel)}</span>
           </div>
-          <div class="sc-tier__signals">${rows}</div>
+          <ul class="sc-signal-list">${items}</ul>
         </div>`;
     }
 
     function renderCompanyPanel(co) {
       const tiersHtml = tierKeys.map(k => renderTier(k, co.tiers[k])).join('');
       const logoHtml = co.logoUrl
-        ? `<img class="sc-company-panel__logo" src="${escapeHtml(co.logoUrl)}" alt="" width="32" height="32" loading="lazy" />`
+        ? `<img class="sc-company-panel__logo" src="${escapeHtml(co.logoUrl)}" alt="" width="28" height="28" loading="lazy" />`
         : '';
       return `
         <div class="sc-company-panel" id="sc-panel-${escapeHtml(co.id)}" role="tabpanel" aria-labelledby="sc-tab-${escapeHtml(co.id)}" hidden>
@@ -1276,7 +1274,7 @@
             <span class="sc-context-label">Hiring context</span>
             <p class="sc-context-text">${escapeHtml(co.context)}</p>
           </div>
-          <div class="sc-company-tiers">${tiersHtml}</div>
+          <div class="sc-tier-grid">${tiersHtml}</div>
         </div>`;
     }
 
