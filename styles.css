@@ -2755,98 +2755,163 @@ details.ai-guide__section[open] .ai-guide__section-summary::after {
   padding: 0 0.25rem;
 }
 
-/* ── Tier legend ── */
-.scorecard-tier-legend {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
-  gap: 0.6rem;
+/* ── Company nav ── */
+.sc-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
   margin-bottom: 2rem;
 }
 
-.sc-legend-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.6rem;
-  padding: 0.75rem 0.85rem;
-  border-radius: var(--radius-sm);
-  background: var(--tier-light);
-  border: 1px solid var(--tier-border);
-}
-
-.sc-legend-dot {
-  flex-shrink: 0;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: var(--tier-color);
-  margin-top: 0.25rem;
-}
-
-.sc-legend-label {
-  display: block;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--tier-color);
-  margin-bottom: 0.15rem;
-}
-
-.sc-legend-sub {
-  display: block;
-  font-size: 0.6875rem;
-  color: var(--text-muted);
-  line-height: 1.4;
-}
-
-/* ── Role cards ── */
-.scorecard-roles {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.sc-role-card {
+.sc-group {
   background: var(--bg-elevated);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
   box-shadow: var(--card-shadow);
-  animation: sharedCellIn 0.4s ease backwards;
-  animation-delay: calc(var(--stagger, 0) * 80ms);
 }
 
-.sc-role-card__header {
+.sc-group__label {
+  font-size: 0.6375rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  padding: 0.65rem 1rem 0.5rem;
+  margin: 0;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+}
+
+.sc-group__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+}
+
+.sc-company-tab {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.7rem 1rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  border-right: 1px solid var(--border);
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s, border-bottom-color 0.15s;
+  white-space: nowrap;
+}
+
+.sc-company-tab:hover {
+  color: var(--text);
+  background: rgba(0,0,0,0.025);
+}
+
+.sc-company-tab[aria-selected="true"] {
+  color: #16a34a;
+  border-bottom-color: #16a34a;
+  font-weight: 700;
+  background: rgba(22, 163, 74, 0.04);
+}
+
+.sc-tab__logo {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  border-radius: 3px;
+  flex-shrink: 0;
+}
+
+/* ── Company panels ── */
+.sc-panels {
+  position: relative;
+}
+
+.sc-company-panel {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  animation: sharedCellIn 0.25s ease backwards;
+}
+
+.sc-company-panel__header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
   padding: 1.25rem 1.5rem 1.1rem;
   background: #f8fafc;
   border-bottom: 1px solid var(--border);
 }
 
-.sc-role-card__title {
+.sc-company-panel__mark {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #fff;
+}
+
+.sc-company-panel__logo {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.sc-company-panel__name {
   font-family: var(--font-display);
   font-size: 1.0625rem;
   font-weight: 700;
   letter-spacing: -0.02em;
   color: var(--text);
-  margin: 0 0 0.3rem;
+  margin: 0 0 0.2rem;
 }
 
-.sc-role-card__employers {
+.sc-company-panel__role {
   font-size: 0.75rem;
   font-weight: 600;
   color: #16a34a;
-  margin: 0 0 0.5rem;
+  margin: 0;
   letter-spacing: 0.01em;
 }
 
-.sc-role-card__desc {
-  margin: 0;
-  font-size: 0.8125rem;
-  color: var(--text-muted);
-  line-height: 1.5;
-  max-width: min(68ch, 100%);
+/* ── Hiring context block ── */
+.sc-company-panel__context {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  background: rgba(0,0,0,0.015);
 }
 
-/* ── Tiers within a role card ── */
-.sc-role-card__tiers {
+.sc-context-label {
+  display: block;
+  font-size: 0.6375rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 0.4rem;
+}
+
+.sc-context-text {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: var(--text);
+  line-height: 1.6;
+  max-width: min(80ch, 100%);
+}
+
+/* ── Tiers ── */
+.sc-company-tiers {
   display: flex;
   flex-direction: column;
 }
@@ -2914,8 +2979,12 @@ details.ai-guide__section[open] .ai-guide__section-summary::after {
   .sc-tier__header {
     padding: 0.75rem 1rem 0.6rem;
   }
-  .sc-role-card__header {
+  .sc-company-panel__header {
     padding: 1rem 1rem 0.85rem;
+  }
+  .sc-company-tab {
+    padding: 0.6rem 0.75rem;
+    font-size: 0.75rem;
   }
 }
 
